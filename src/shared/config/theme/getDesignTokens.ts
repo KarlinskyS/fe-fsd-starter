@@ -1,8 +1,45 @@
-import { alpha, type Palette, type ThemeOptions } from '@mui/material';
+import { alpha, type PaletteMode, type Theme, type ThemeOptions } from '@mui/material';
 
-export function getDesignTokens(mode: Palette): ThemeOptions {
+const primaryMain = '#1976d2';
+const secondaryMain = '#2e7d32';
+const greyLight = '#f3f4f6';
+const greyMain = '#9ca3af';
+
+const lightPalette: ThemeOptions['palette'] = {
+  primary: { main: primaryMain },
+  secondary: { main: secondaryMain },
+  background: {
+    default: '#f5f5f5',
+    paper: '#ffffff',
+  },
+  text: {
+    primary: '#111827',
+    secondary: '#4b5563',
+  },
+  grey: {
+    700: '#374151',
+  },
+};
+
+const darkPalette: ThemeOptions['palette'] = {
+  primary: { main: '#90caf9' },
+  secondary: { main: '#a5d6a7' },
+  background: {
+    default: '#0f172a',
+    paper: '#111827',
+  },
+  text: {
+    primary: '#f9fafb',
+    secondary: '#cbd5f5',
+  },
+  grey: {
+    700: '#9ca3af',
+  },
+};
+
+export function getDesignTokens(mode: PaletteMode, direction: 'ltr' | 'rtl'): ThemeOptions {
   return {
-    direction: 'rtl',
+    direction,
     breakpoints: {
       values: {
         xs: 0,
@@ -335,7 +372,7 @@ export function getDesignTokens(mode: Palette): ThemeOptions {
           resizeThrottleMs: 300,
         },
         styleOverrides: {
-          root: ({ theme }) => ({
+          root: ({ theme }: { theme: Theme }) => ({
             border: 0,
             borderRadius: 0,
             '& .MuiDataGrid-columnHeader': {
