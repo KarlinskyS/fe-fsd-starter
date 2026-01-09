@@ -19,7 +19,8 @@
       "@shared/*": ["shared/*"],
       "@app/*": ["app/*"],
       "@features/*": ["features/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@widgets/*": ["widgets/*"]
     },
 
     /* Linting */
