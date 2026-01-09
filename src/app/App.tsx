@@ -1,10 +1,11 @@
-import { Layout } from '@pages/layout';
-import { BackdropProvider } from './providers';
+import { RouterProvider } from '@tanstack/react-router';
+import { router } from '@app/routing';
+import { AppProviders } from './providers';
 
 export function App() {
   return (
-    <BackdropProvider>
-      <Layout />
-    </BackdropProvider>
+    <AppProviders>
+      <RouterProvider router={router} />
+    </AppProviders>
   );
 }

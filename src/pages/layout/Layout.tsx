@@ -1,5 +1,6 @@
-import { Outlet } from 'react-router';
+import { Outlet } from '@tanstack/react-router';
 import { InitialFeature } from '@features/initialFeature';
+import { LanguageSwitcher } from '@features/languageSwitcher';
 import { Box } from '@shared/ui';
 
 export const Layout = () => {
@@ -11,6 +12,7 @@ export const Layout = () => {
         overflowY: 'hidden',
       }}
     >
+      <LanguageSwitcher />
       <InitialFeature />
       <Outlet />
     </Box>

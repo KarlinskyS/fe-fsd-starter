@@ -52,3 +52,8 @@ export default tseslint.config({
   },
 })
 ```
+
+## FSD import rules
+
+- Use only public APIs between layers/slices (import via `index.ts`/`index.tsx`).
+- Avoid deep imports into another slice's internal files.

@@ -1,47 +1,49 @@
 import { createTheme, CssBaseline, ThemeProvider as MuiThemeProvider } from '@mui/material';
-import { ThemeContext } from '@shared/lib';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { getDesignTokens, STORED_PALETTE_MODE } from '@shared/config';
+import {
+  DEFAULT_MODE,
+  persistThemeMode,
+  readStoredThemeMode,
+  ThemeContext,
+  useTranslation,
+} from '@shared/lib';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import type { ThemeMode } from '@shared/lib';
 
-const STORED_PALETTE_MODE = `${import.meta.env.VITE_APP_TITLE}_palette_mode`;
-
-export const ThemeProvider = ({ theme, children }: { theme?: 'light' | 'dark'; children: React.ReactNode }) => {
-  const [mode, setMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const storedMode = localStorage.getItem(STORED_PALETTE_MODE);
-      return storedMode || 'light';
-    }
-    return 'light';
-  });
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [mode, setMode] = useState<ThemeMode>(() =>
+    readStoredThemeMode(STORED_PALETTE_MODE, DEFAULT_MODE),
+  );
+  const { direction } = useTranslation();
 
   const toggleTheme = useCallback(() => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem(STORED_PALETTE_MODE, mode);
+    persistThemeMode(STORED_PALETTE_MODE, mode);
     document.documentElement.setAttribute('data-theme', mode);
   }, [mode]);
 
-  const baseTheme = useMemo(
+  const theme = useMemo(
     () =>
       createTheme({
-        ...getDesignTokens(mode),
+        ...getDesignTokens(mode, direction),
       }),
-    [mode],
+    [mode, direction],
   );
-  const tempTheme = theme || baseTheme;
   const themeValue = useMemo(
     () => ({
       mode,
       toggleTheme,
-      baseTheme: tempTheme,
+      theme,
     }),
-    [mode, toggleTheme, tempTheme],
+    [mode, toggleTheme, theme],
   );
 
   return (
     <ThemeContext.Provider value={themeValue}>
-      <MuiThemeProvider theme={tempTheme}>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline enableColorScheme />
 
         {children}

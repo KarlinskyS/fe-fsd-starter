@@ -1,9 +1,10 @@
-import { useBackdrop } from '@shared/lib';
+import { useBackdrop, useTranslation } from '@shared/lib';
 import { Box, Button, Typography } from '@shared/ui';
 import { useEffect, useRef } from 'react';
 
 export const InitialFeature = () => {
   const { showBackdrop, hideBackdrop } = useBackdrop();
+  const { t } = useTranslation();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleOpen = () => {
@@ -20,9 +21,9 @@ export const InitialFeature = () => {
   }, []);
   return (
     <Box>
-      HI Application
-      <Typography> Hello world!</Typography>
-      <Button onClick={handleOpen}>open Backdrop</Button>
+      {t('initialFeature.title')}
+      <Typography>{t('initialFeature.greeting')}</Typography>
+      <Button onClick={handleOpen}>{t('initialFeature.openBackdrop')}</Button>
     </Box>
   );
 };
