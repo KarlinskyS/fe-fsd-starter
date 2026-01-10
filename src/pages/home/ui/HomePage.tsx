@@ -3,6 +3,7 @@ import { routePaths } from '@shared/config';
 import { useTranslation, useToast } from '@shared/lib';
 import { Box, Button, Typography } from '@shared/ui';
 import { ThemeSwitcherToggle } from '@features/themeSwitcher';
+import { MockRequestPanel } from '@features/mockRequest';
 
 export const HomePage = () => {
   const { t } = useTranslation();
@@ -29,6 +30,7 @@ export const HomePage = () => {
           {t('homePage.showToast')}
         </Button>
       </Box>
+      <MockRequestPanel />
       <Button component={Link} to={routePaths.second} variant="contained">
         {t('homePage.goToSecondPage')}
       </Button>

@@ -57,3 +57,7 @@ export default tseslint.config({
 
 - Use only public APIs between layers/slices (import via `index.ts`/`index.tsx`).
 - Avoid deep imports into another slice's internal files.
+
+## MSW (dev)
+
+- В `.env.development` `VITE_API_URL=/`, чтобы запросы шли на тот же origin и матчились хэндлерами MSW.
