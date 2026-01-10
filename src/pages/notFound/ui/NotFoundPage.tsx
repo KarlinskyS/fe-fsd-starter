@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+import { routePaths } from '@shared/config';
 import { Box, Button, Typography } from '@shared/ui';
 
 export const NotFoundPage = () => {
@@ -8,7 +9,7 @@ export const NotFoundPage = () => {
       <Typography sx={{ marginTop: 1, marginBottom: 2 }}>
         The page does not exist.
       </Typography>
-      <Button component={Link} to="/" variant="contained">
+      <Button component={Link} to={routePaths.home} variant="contained">
         Go to home
       </Button>
     </Box>

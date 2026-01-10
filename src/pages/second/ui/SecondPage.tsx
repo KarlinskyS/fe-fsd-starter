@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+import { routePaths } from '@shared/config';
 import { Box, Button, Typography } from '@shared/ui';
 
 export const SecondPage = () => {
@@ -8,7 +9,7 @@ export const SecondPage = () => {
       <Typography sx={{ marginTop: 1, marginBottom: 2 }}>
         Test page B
       </Typography>
-      <Button component={Link} to="/" variant="outlined">
+      <Button component={Link} to={routePaths.home} variant="outlined">
         Back to home
       </Button>
     </Box>
