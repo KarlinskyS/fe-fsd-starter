@@ -5,6 +5,7 @@ import { BackdropProvider } from './BackdropProvider';
 import { HttpClientProvider } from './HttpClientProvider';
 import { QueryProvider } from './QueryProvider';
 import { ThemeProvider } from './ThemeProvider';
+import { ToastProvider } from './ToastProvider';
 import { TranslationProvider } from './TranslationProvider';
 
 interface AppProvidersProps {
@@ -17,7 +18,9 @@ export const AppProviders = ({ children }: AppProvidersProps) => {
       <ThemeProvider>
         <HttpClientProvider client={httpClient}>
           <QueryProvider>
-            <BackdropProvider>{children}</BackdropProvider>
+            <ToastProvider>
+              <BackdropProvider>{children}</BackdropProvider>
+            </ToastProvider>
           </QueryProvider>
         </HttpClientProvider>
       </ThemeProvider>

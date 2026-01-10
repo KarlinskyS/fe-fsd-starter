@@ -286,12 +286,26 @@ export function getDesignTokens(mode: PaletteMode, direction: 'ltr' | 'rtl'): Th
       },
       MuiSnackbar: {
         styleOverrides: {
-          root: ({ theme }) => ({
-            [theme.breakpoints.up('md')]: {
-              right: 304,
-              left: 24,
-            },
-          }),
+          root: ({
+            theme,
+            ownerState,
+          }: {
+            theme: Theme;
+            ownerState: { anchorOrigin?: { horizontal?: string } };
+          }) => {
+            const isCentered = ownerState.anchorOrigin?.horizontal === 'center';
+
+            if (isCentered) {
+              return {};
+            }
+
+            return {
+              [theme.breakpoints.up('md')]: {
+                right: 304,
+                left: 24,
+              },
+            };
+          },
         },
         defaultProps: {
           autoHideDuration: 20000,
